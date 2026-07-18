@@ -317,9 +317,9 @@ export function AlineaEditor() {
     <div className="flex-1 flex flex-col relative">
       {/* Document header */}
       <div
-        className="flex items-center gap-3"
+        className="flex items-center gap-2 sm:gap-3 flex-wrap"
         style={{
-          padding: "14px 22px",
+          padding: "12px 14px",
           borderBottom: "1px solid var(--hairline-veil)",
         }}
       >
@@ -356,7 +356,7 @@ export function AlineaEditor() {
         </div>
 
         <div
-          className="flex items-center gap-2 text-parchment-500 font-sans"
+          className="hidden sm:flex items-center gap-2 text-parchment-500 font-sans"
           style={{ fontSize: 11 }}
         >
           <span className="tabular-nums">{words} mots · {readMin} min</span>
@@ -408,8 +408,8 @@ export function AlineaEditor() {
 
       {/* Canvas */}
       <div
-        className="alinea-scroll relative flex-1 overflow-auto"
-        style={{ padding: "40px 40px 140px" }}
+        className="alinea-scroll relative flex-1 overflow-auto px-4 sm:px-10"
+        style={{ paddingTop: 32, paddingBottom: 140 }}
       >
         <div
           className="mx-auto relative"

@@ -41,7 +41,7 @@ export default async function AppLayout({
         </Link>
         <div className="flex items-center gap-3">
           <span
-            className="text-parchment-400 font-sans"
+            className="hidden sm:inline text-parchment-400 font-sans"
             style={{ fontSize: 12 }}
           >
             {session.user.name ?? "Invité"}

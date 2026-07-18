@@ -132,18 +132,15 @@ export function SlashMenu({ editor }: Props) {
     const positionAtCaret = () => {
       const { from } = editor.state.selection;
       const coords = editor.view.coordsAtPos(from);
-      const scrollRoot = editor.view.dom.closest(
-        ".alinea-scroll",
-      ) as HTMLElement | null;
-      const containerRect = scrollRoot?.getBoundingClientRect();
-      const scrollTop = scrollRoot?.scrollTop ?? 0;
-      const scrollLeft = scrollRoot?.scrollLeft ?? 0;
-      if (!containerRect) {
-        return { top: coords.bottom + 6, left: coords.left };
-      }
+      const pmRect = editor.view.dom.getBoundingClientRect();
+      const menuWidth = 280;
+      const clampedX = Math.max(
+        12,
+        Math.min(coords.left, window.innerWidth - 12 - menuWidth),
+      );
       return {
-        top: coords.bottom - containerRect.top + scrollTop + 6,
-        left: coords.left - containerRect.left + scrollLeft,
+        top: coords.bottom - pmRect.top + 6,
+        left: clampedX - pmRect.left,
       };
     };
 
