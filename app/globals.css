@@ -331,6 +331,89 @@ kbd {
 .ProseMirror { outline: none; }
 .ProseMirror-focused { outline: none; }
 
+/* Tables */
+.alinea-canvas table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  table-layout: fixed;
+  overflow: hidden;
+}
+.alinea-canvas th, .alinea-canvas td {
+  border: 1px solid var(--hairline);
+  padding: 8px 12px;
+  vertical-align: top;
+  min-width: 80px;
+  position: relative;
+}
+.alinea-canvas th {
+  background: var(--pill-bg);
+  color: var(--color-parchment-50);
+  font-weight: 500;
+  text-align: left;
+}
+.alinea-canvas td { color: var(--color-parchment-100); }
+.alinea-canvas table .selectedCell:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--color-ember-500) 15%, transparent);
+  pointer-events: none;
+}
+.alinea-canvas table p { margin: 0; }
+.alinea-canvas .tableWrapper { overflow-x: auto; }
+
+/* Task list */
+.alinea-canvas ul[data-type="taskList"] {
+  padding-left: 0;
+  list-style: none;
+}
+.alinea-canvas ul[data-type="taskList"] > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0.25em 0;
+}
+.alinea-canvas ul[data-type="taskList"] > li > label {
+  flex-shrink: 0;
+  margin-top: 0.35em;
+  user-select: none;
+}
+.alinea-canvas ul[data-type="taskList"] > li > label input[type="checkbox"] {
+  accent-color: var(--color-ember-500);
+  width: 14px;
+  height: 14px;
+}
+.alinea-canvas ul[data-type="taskList"] > li > div { flex: 1; }
+.alinea-canvas ul[data-type="taskList"] > li[data-checked="true"] > div p {
+  color: var(--color-parchment-500);
+  text-decoration: line-through;
+}
+
+/* Images */
+.alinea-canvas img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+  margin: 1em 0;
+}
+
+/* Text color/highlight inline styles apply directly */
+.alinea-canvas span[style*="color"] {
+  /* color inherited from inline style */
+}
+
+/* Print styles — hide toolbars, expand canvas for PDF export via print */
+@media print {
+  body { background: white !important; color: black !important; }
+  header, [class*="Toolbar"], nav, footer { display: none !important; }
+  .alinea-canvas { color: black !important; }
+  .alinea-canvas h1, .alinea-canvas h2, .alinea-canvas h3 { color: black !important; }
+  .alinea-canvas blockquote { border-color: #b46a26 !important; color: #444 !important; }
+  .sticky { display: none !important; }
+}
+
 /* Hero entrance — subtle rise + fade with staggered delay */
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(12px); }
