@@ -24,7 +24,9 @@ import { TableHeader } from "@tiptap/extension-table-header";
 import { TableCell } from "@tiptap/extension-table-cell";
 import { AnimatePresence, motion } from "motion/react";
 
-import { Toolbar } from "./Toolbar";
+import { BubbleMenu } from "./BubbleMenu";
+import { SlashMenu } from "./SlashMenu";
+import { TypographyPopover } from "./TypographyPopover";
 import { findFont } from "./fonts";
 import { IconCommand, IconSparkles } from "@/app/components/icons";
 import {
@@ -42,15 +44,18 @@ const LH_KEY = "alinea-lh";
 
 const initialContent = `
 <h1>Sans titre</h1>
-<p>Bienvenue dans ton canvas. Commence à écrire — ou appuie sur <code>⌘K</code> pour ouvrir la palette d'actions.</p>
-<p>Sélectionne un morceau de texte pour voir apparaître les options de format et d'IA. Glisse un fichier <code>.md</code>, <code>.txt</code> ou <code>.html</code> sur la fenêtre pour l'importer.</p>
+<p>Bienvenue dans ton canvas. Commence à écrire — ou tape <code>/</code> sur une ligne vide pour insérer un bloc.</p>
+<p>Sélectionne quelques mots : un menu flottant apparaît avec le formatage et l'IA. Appuie sur <code>⌘K</code> pour ouvrir la palette complète. Glisse un <code>.md</code>, <code>.txt</code> ou <code>.html</code> sur la fenêtre pour l'importer.</p>
 `.trim();
+
+const MAX_WIDTH_KEY = "alinea-maxwidth";
 
 export function AlineaEditor() {
   const [mode, setMode] = useState<"edit" | "preview">("edit");
   const [fontKey, setFontKey] = useState("spectral");
   const [fontSize, setFontSize] = useState(17);
   const [lineHeight, setLineHeight] = useState(1.7);
+  const [maxWidth, setMaxWidth] = useState(720);
   const [docTitle, setDocTitle] = useState("Sans titre");
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [fileMenuOpen, setFileMenuOpen] = useState(false);
@@ -125,6 +130,8 @@ export function AlineaEditor() {
       if (size) setFontSize(Number(size));
       const lh = localStorage.getItem(LH_KEY);
       if (lh) setLineHeight(Number(lh));
+      const mw = localStorage.getItem(MAX_WIDTH_KEY);
+      if (mw) setMaxWidth(Number(mw));
     } catch {}
   }, [editor]);
 
@@ -148,6 +155,11 @@ export function AlineaEditor() {
       localStorage.setItem(LH_KEY, String(lineHeight));
     } catch {}
   }, [lineHeight]);
+  useEffect(() => {
+    try {
+      localStorage.setItem(MAX_WIDTH_KEY, String(maxWidth));
+    } catch {}
+  }, [maxWidth]);
 
   /* --- keyboard shortcuts --- */
   useEffect(() => {
@@ -354,6 +366,17 @@ export function AlineaEditor() {
 
         <ModeToggle mode={mode} onChange={setMode} />
 
+        <TypographyPopover
+          fontKey={fontKey}
+          onFontChange={setFontKey}
+          fontSize={fontSize}
+          onFontSizeChange={setFontSize}
+          lineHeight={lineHeight}
+          onLineHeightChange={setLineHeight}
+          maxWidth={maxWidth}
+          onMaxWidthChange={setMaxWidth}
+        />
+
         <div className="relative">
           <button
             onClick={() => setFileMenuOpen((v) => !v)}
@@ -383,35 +406,26 @@ export function AlineaEditor() {
         </div>
       </div>
 
-      {/* Toolbar */}
-      {mode === "edit" && (
-        <Toolbar
-          editor={editor}
-          fontKey={fontKey}
-          onFontChange={setFontKey}
-          fontSize={fontSize}
-          onFontSizeChange={setFontSize}
-          lineHeight={lineHeight}
-          onLineHeightChange={setLineHeight}
-        />
-      )}
-
       {/* Canvas */}
       <div
-        className="relative flex-1 overflow-auto"
-        style={{ padding: "40px 40px 120px" }}
+        className="alinea-scroll relative flex-1 overflow-auto"
+        style={{ padding: "40px 40px 140px" }}
       >
         <div
-          className="mx-auto"
+          className="mx-auto relative"
           style={{
-            maxWidth: 720,
+            maxWidth,
             fontFamily: currentFont.css,
             fontSize,
             lineHeight,
           }}
         >
           {mode === "edit" ? (
-            <EditorContent editor={editor} className="alinea-canvas" />
+            <>
+              <EditorContent editor={editor} className="alinea-canvas" />
+              <BubbleMenu editor={editor} />
+              <SlashMenu editor={editor} />
+            </>
           ) : (
             <div
               className="alinea-canvas alinea-preview"
@@ -616,7 +630,7 @@ function FileMenu({
       items: [
         { label: "Télécharger en Markdown", hint: ".md", run: actions.exportMd },
         { label: "Télécharger en HTML", hint: ".html", run: actions.exportHtml },
-        { label: "Télécharger au format Word", hint: ".doc", run: actions.exportDoc },
+        { label: "Télécharger en .doc", hint: "compatible traitement de texte", run: actions.exportDoc },
         { label: "Exporter en PDF", hint: "impression", run: actions.exportPdf },
         { label: "Imprimer", hint: "⌘P", run: actions.print },
       ],
@@ -810,7 +824,7 @@ function Palette({
       items: [
         { label: "Télécharger en Markdown", hint: ".md", run: actions.exportMd },
         { label: "Télécharger en HTML", hint: ".html", run: actions.exportHtml },
-        { label: "Télécharger au format Word", hint: ".doc", run: actions.exportDoc },
+        { label: "Télécharger en .doc", hint: "compatible traitement de texte", run: actions.exportDoc },
         { label: "Exporter en PDF", hint: "print", run: actions.exportPdf },
         { label: "Imprimer", hint: "⌘P", run: actions.print },
         { label: "Copier le lien de partage", run: actions.share },

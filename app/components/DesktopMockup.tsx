@@ -625,7 +625,7 @@ const paletteGroups: Array<{
     label: "Écrire avec l'IA",
     items: [
       ["Écrire un essai à partir de…", "prompt · draft"],
-      ["Continuer le dernier paragraphe", "inline · Gemini"],
+      ["Continuer le dernier paragraphe", "inline · IA"],
       ["Résumer ce document en 3 points", "summarize"],
       ["Traduire tout en anglais", "translate · en"],
     ],
