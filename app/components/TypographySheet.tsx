@@ -39,11 +39,10 @@ export function TypographySheet({ scale = 1 }: Props) {
     <div
       className="rounded-t-[28px] backdrop-blur-xl relative overflow-hidden"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(38, 20, 14, 0.92) 0%, rgba(20, 10, 7, 0.96) 100%)",
-        borderTop: "1px solid rgba(214, 138, 60, 0.14)",
+        background: "var(--surface-sheet)",
+        borderTop: "1px solid var(--hairline)",
         boxShadow:
-          "0 -8px 24px -8px rgba(0,0,0,0.4), 0 -1px 0 rgba(214,138,60,0.08) inset",
+          "0 -8px 24px -8px rgba(0,0,0,0.15), 0 -1px 0 var(--hairline) inset",
         padding: `${8 * scale}px ${8 * scale}px ${22 * scale}px`,
       }}
     >
@@ -71,13 +70,13 @@ export function TypographySheet({ scale = 1 }: Props) {
               className="flex flex-col items-center justify-start gap-1 rounded-2xl transition-colors"
               style={{
                 padding: `${10 * scale}px ${4 * scale}px ${8 * scale}px`,
-                background: active
-                  ? "rgba(214, 138, 60, 0.10)"
-                  : "transparent",
+                background: active ? "var(--accent-tint)" : "transparent",
                 border: active
-                  ? "1px solid rgba(214, 138, 60, 0.35)"
+                  ? "1px solid color-mix(in oklab, var(--color-ember-500) 45%, transparent)"
                   : "1px solid transparent",
-                color: active ? "#f4ebd7" : "#a8927a",
+                color: active
+                  ? "var(--color-parchment-100)"
+                  : "var(--color-parchment-500)",
               }}
             >
               <span
@@ -142,9 +141,9 @@ export function TypographySheet({ scale = 1 }: Props) {
         <div
           className="flex items-center gap-1 rounded-2xl"
           style={{
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--track-soft)",
             padding: `${5 * scale}px`,
-            border: "1px solid rgba(255,255,255,0.05)",
+            border: "1px solid var(--hairline-veil)",
           }}
         >
           {(
@@ -164,8 +163,10 @@ export function TypographySheet({ scale = 1 }: Props) {
                 style={{
                   width: px(40),
                   height: px(32),
-                  background: active ? "rgba(214,138,60,0.15)" : "transparent",
-                  color: active ? "#f4ebd7" : "#a8927a",
+                  background: active ? "var(--accent-tint-strong)" : "transparent",
+                  color: active
+                    ? "var(--color-parchment-100)"
+                    : "var(--color-parchment-500)",
                 }}
               >
                 <Icon style={{ width: px(18), height: px(18) }} />
@@ -177,9 +178,9 @@ export function TypographySheet({ scale = 1 }: Props) {
         <div
           className="flex items-center gap-1 rounded-2xl"
           style={{
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--track-soft)",
             padding: `${5 * scale}px`,
-            border: "1px solid rgba(255,255,255,0.05)",
+            border: "1px solid var(--hairline-veil)",
           }}
         >
           <button
@@ -188,8 +189,10 @@ export function TypographySheet({ scale = 1 }: Props) {
             style={{
               width: px(40),
               height: px(32),
-              background: bold ? "rgba(214,138,60,0.15)" : "transparent",
-              color: bold ? "#f4ebd7" : "#a8927a",
+              background: bold ? "var(--accent-tint-strong)" : "transparent",
+              color: bold
+                ? "var(--color-parchment-100)"
+                : "var(--color-parchment-500)",
             }}
           >
             <IconBold style={{ width: px(18), height: px(18) }} />
@@ -200,8 +203,10 @@ export function TypographySheet({ scale = 1 }: Props) {
             style={{
               width: px(40),
               height: px(32),
-              background: italic ? "rgba(214,138,60,0.15)" : "transparent",
-              color: italic ? "#f4ebd7" : "#a8927a",
+              background: italic ? "var(--accent-tint-strong)" : "transparent",
+              color: italic
+                ? "var(--color-parchment-100)"
+                : "var(--color-parchment-500)",
             }}
           >
             <IconItalic style={{ width: px(18), height: px(18) }} />

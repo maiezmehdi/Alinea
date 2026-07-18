@@ -22,7 +22,7 @@ export function PhoneFrame({ children, scale = 1, className = "" }: Props) {
       >
         {/* Screen */}
         <div
-          className="relative w-full h-full overflow-hidden bg-[#0f0705]"
+          className="phone-screen relative w-full h-full overflow-hidden"
           style={{ borderRadius: `${46 * scale}px` }}
         >
           {/* Dynamic Island */}
@@ -36,11 +36,12 @@ export function PhoneFrame({ children, scale = 1, className = "" }: Props) {
           />
           {/* Status bar */}
           <div
-            className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 z-20 text-white/80 font-sans"
+            className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 z-20 font-sans"
             style={{
               height: `${44 * scale}px`,
               fontSize: `${13 * scale}px`,
               padding: `0 ${28 * scale}px`,
+              color: "var(--status-bar-fg)",
             }}
           >
             <span className="font-semibold">9:41</span>

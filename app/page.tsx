@@ -2,6 +2,7 @@ import { PhoneFrame } from "./components/PhoneFrame";
 import { CanvasReadingView } from "./components/CanvasReadingView";
 import { TypographySheet } from "./components/TypographySheet";
 import { DesktopMockup } from "./components/DesktopMockup";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 const paragraphsLeft = [
   "Some afternoons feel as if they arrive without a purpose. The cup stays warm in her hands, the street outside moves slowly, and for once she does not try to fill the quiet with plans. She lets the hour pass without naming it useful. The room is still, the light is low, and nothing asks to be fixed.",
@@ -14,7 +15,7 @@ const paragraphsRight = [
 ];
 
 function RowCells({ cells, last }: { cells: string[]; last?: boolean }) {
-  const border = last ? {} : { borderTop: "1px solid rgba(255,255,255,0.03)" };
+  const border = last ? {} : { borderTop: "1px solid var(--hairline-veil)" };
   return (
     <>
       <div
@@ -35,8 +36,9 @@ function RowCells({ cells, last }: { cells: string[]; last?: boolean }) {
       <div
         className="p-5 text-center text-parchment-50"
         style={{
-          background: "rgba(214,138,60,0.05)",
-          borderLeft: "1px solid rgba(214,138,60,0.20)",
+          background: "var(--accent-tint)",
+          borderLeft:
+            "1px solid color-mix(in oklab, var(--color-ember-500) 25%, transparent)",
           fontSize: 12,
           lineHeight: 1.5,
           ...border,
@@ -77,24 +79,35 @@ export default function Home() {
             linéa
           </span>
         </div>
-        <nav className="flex items-center gap-8 text-parchment-400 text-sm font-sans">
-          <a href="#showcase" className="hover:text-parchment-100 transition-colors">
+        <nav className="flex items-center gap-6 text-parchment-400 text-sm font-sans">
+          <a
+            href="#showcase"
+            className="hidden sm:inline hover:text-parchment-100 transition-colors"
+          >
             Concept
           </a>
-          <a href="#desktop" className="hover:text-parchment-100 transition-colors">
+          <a
+            href="#desktop"
+            className="hidden sm:inline hover:text-parchment-100 transition-colors"
+          >
             Design
           </a>
-          <a href="#pillars" className="hover:text-parchment-100 transition-colors">
-            Pilliers
+          <a
+            href="#pillars"
+            className="hidden md:inline hover:text-parchment-100 transition-colors"
+          >
+            Piliers
           </a>
+          <ThemeToggle />
           <span
-            className="px-3 py-1.5 rounded-full text-xs font-sans text-ember-200"
+            className="hidden md:inline px-3 py-1.5 rounded-full text-xs font-sans text-ember-200"
             style={{
-              border: "1px solid rgba(214,138,60,0.30)",
-              background: "rgba(214,138,60,0.06)",
+              border:
+                "1px solid color-mix(in oklab, var(--color-ember-500) 35%, transparent)",
+              background: "var(--accent-tint)",
             }}
           >
-            Maquette v0.1
+            Maquette v0.2
           </span>
         </nav>
       </header>
@@ -104,8 +117,9 @@ export default function Home() {
         <div
           className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-8 text-xs font-sans text-parchment-300"
           style={{
-            border: "1px solid rgba(214,138,60,0.20)",
-            background: "rgba(214,138,60,0.05)",
+            border:
+              "1px solid color-mix(in oklab, var(--color-ember-500) 25%, transparent)",
+            background: "var(--accent-tint)",
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-ember-400 shadow-[0_0_8px_rgba(214,138,60,0.8)]" />
@@ -139,8 +153,9 @@ export default function Home() {
         <div className="mt-10 flex items-center justify-center gap-3">
           <a
             href="#showcase"
-            className="text-sm font-sans px-5 py-3 rounded-full text-ink-900 font-medium"
+            className="text-sm font-sans px-5 py-3 rounded-full font-medium"
             style={{
+              color: "#1a0d09",
               background:
                 "linear-gradient(180deg, #f6d194 0%, #e59a3f 100%)",
               boxShadow:
@@ -153,8 +168,9 @@ export default function Home() {
             href="#pillars"
             className="text-sm font-sans px-5 py-3 rounded-full text-parchment-200 transition-colors hover:text-parchment-50"
             style={{
-              border: "1px solid rgba(214,138,60,0.20)",
-              background: "rgba(214,138,60,0.03)",
+              border:
+                "1px solid color-mix(in oklab, var(--color-ember-500) 25%, transparent)",
+              background: "var(--pill-bg)",
             }}
           >
             Lire le manifeste
@@ -294,8 +310,8 @@ export default function Home() {
           className="rounded-2xl overflow-hidden"
           style={{
             background:
-              "linear-gradient(180deg, rgba(38, 20, 14, 0.55) 0%, rgba(20, 10, 7, 0.55) 100%)",
-            border: "1px solid rgba(214,138,60,0.12)",
+              "var(--surface-card)",
+            border: "1px solid var(--hairline)",
           }}
         >
           <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr_1fr] text-xs font-sans">
@@ -319,8 +335,9 @@ export default function Home() {
                 style={
                   c.tone === "brand"
                     ? {
-                        background: "rgba(214,138,60,0.05)",
-                        borderLeft: "1px solid rgba(214,138,60,0.20)",
+                        background: "var(--accent-tint)",
+                        borderLeft:
+                          "1px solid color-mix(in oklab, var(--color-ember-500) 25%, transparent)",
                       }
                     : {}
                 }
@@ -419,9 +436,9 @@ export default function Home() {
               className="rounded-2xl p-8 flex flex-col"
               style={{
                 background:
-                  "linear-gradient(180deg, rgba(38, 20, 14, 0.6) 0%, rgba(20, 10, 7, 0.6) 100%)",
-                border: "1px solid rgba(214,138,60,0.14)",
-                boxShadow: "0 20px 40px -20px rgba(0,0,0,0.5)",
+                  "var(--surface-glass)",
+                border: "1px solid var(--hairline)",
+                boxShadow: "var(--shadow-elevated)",
               }}
             >
               <div className="flex items-center gap-2 mb-6">
@@ -460,8 +477,8 @@ export default function Home() {
           className="rounded-2xl p-10 relative overflow-hidden"
           style={{
             background:
-              "linear-gradient(180deg, rgba(38, 20, 14, 0.5) 0%, rgba(20, 10, 7, 0.5) 100%)",
-            border: "1px solid rgba(214,138,60,0.12)",
+              "var(--surface-card)",
+            border: "1px solid var(--hairline)",
           }}
         >
           <div
@@ -506,8 +523,8 @@ export default function Home() {
                   key={label}
                   className="rounded-xl p-4"
                   style={{
-                    background: "rgba(255,255,255,0.02)",
-                    border: "1px solid rgba(214,138,60,0.10)",
+                    background: "var(--track-soft)",
+                    border: "1px solid var(--hairline)",
                   }}
                 >
                   <div className="text-parchment-100 font-sans text-sm">

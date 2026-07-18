@@ -1,7 +1,10 @@
 {
   "name": "alinea",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "15.5.4",
+    "next": "15.5.20",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

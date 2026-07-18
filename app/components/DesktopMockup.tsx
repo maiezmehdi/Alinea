@@ -20,15 +20,14 @@ export function DesktopMockup() {
     <div
       className="relative rounded-[18px] overflow-hidden ember-glow"
       style={{
-        background:
-          "linear-gradient(180deg, #1a0d09 0%, #120806 100%)",
-        border: "1px solid rgba(214, 138, 60, 0.14)",
+        background: "var(--surface-glass-strong)",
+        border: "1px solid var(--window-outline)",
       }}
     >
       {/* Window chrome */}
       <div
-        className="flex items-center justify-between border-b border-white/[0.04]"
-        style={{ padding: "12px 16px" }}
+        className="flex items-center justify-between"
+        style={{ padding: "12px 16px", borderBottom: "1px solid var(--hairline-soft)" }}
       >
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-red-400/50" />
@@ -46,7 +45,7 @@ export function DesktopMockup() {
           {/* Edit / Preview toggle */}
           <div
             className="flex rounded-full p-0.5"
-            style={{ background: "rgba(255,255,255,0.04)" }}
+            style={{ background: "var(--pill-bg)" }}
           >
             {(["edit", "preview"] as Mode[]).map((m) => (
               <button
@@ -54,12 +53,16 @@ export function DesktopMockup() {
                 onClick={() => setMode(m)}
                 className={`text-xs font-sans px-3 py-1 rounded-full transition-colors ${
                   mode === m
-                    ? "bg-ember-500/15 text-parchment-100"
+                    ? "text-parchment-100"
                     : "text-parchment-400"
                 }`}
                 style={
                   mode === m
-                    ? { border: "1px solid rgba(214,138,60,0.35)" }
+                    ? {
+                        border:
+                          "1px solid color-mix(in oklab, var(--color-ember-500) 45%, transparent)",
+                        background: "var(--accent-tint-strong)",
+                      }
                     : { border: "1px solid transparent" }
                 }
               >
@@ -73,8 +76,9 @@ export function DesktopMockup() {
             style={{
               padding: "5px 10px",
               borderRadius: "8px",
-              border: "1px solid rgba(214,138,60,0.20)",
-              background: showAI ? "rgba(214,138,60,0.10)" : "transparent",
+              border:
+                "1px solid color-mix(in oklab, var(--color-ember-500) 35%, transparent)",
+              background: showAI ? "var(--accent-tint)" : "transparent",
             }}
           >
             <IconCommand style={{ width: 12, height: 12 }} />
@@ -86,8 +90,12 @@ export function DesktopMockup() {
       <div className="flex" style={{ minHeight: 520 }}>
         {/* Sidebar */}
         <aside
-          className="border-r border-white/[0.03] text-parchment-400 font-sans text-xs flex flex-col"
-          style={{ width: 200, padding: "20px 14px" }}
+          className="text-parchment-400 font-sans text-xs flex flex-col"
+          style={{
+            width: 200,
+            padding: "20px 14px",
+            borderRight: "1px solid var(--hairline-veil)",
+          }}
         >
           <div className="text-parchment-500 uppercase tracking-widest text-[10px] mb-3">
             Recent
@@ -104,10 +112,16 @@ export function DesktopMockup() {
               className="flex flex-col rounded-lg cursor-pointer transition-colors"
               style={{
                 padding: "8px 10px",
-                background: i === 0 ? "rgba(214,138,60,0.08)" : "transparent",
-                border: i === 0 ? "1px solid rgba(214,138,60,0.20)" : "1px solid transparent",
+                background: i === 0 ? "var(--accent-tint)" : "transparent",
+                border:
+                  i === 0
+                    ? "1px solid color-mix(in oklab, var(--color-ember-500) 30%, transparent)"
+                    : "1px solid transparent",
                 marginBottom: 3,
-                color: i === 0 ? "#f4ebd7" : "#a8927a",
+                color:
+                  i === 0
+                    ? "var(--color-parchment-100)"
+                    : "var(--color-parchment-500)",
               }}
             >
               <span className="text-[12px]">{title}</span>
@@ -115,7 +129,10 @@ export function DesktopMockup() {
             </div>
           ))}
 
-          <div className="mt-auto text-[10px] text-parchment-500 pt-4 border-t border-white/[0.03]">
+          <div
+            className="mt-auto text-[10px] text-parchment-500 pt-4"
+            style={{ borderTop: "1px solid var(--hairline-veil)" }}
+          >
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-ember-400" />
               <span>Synced to Drive</span>
@@ -149,8 +166,12 @@ export function DesktopMockup() {
 
           {/* Bottom status */}
           <div
-            className="flex items-center justify-between text-parchment-500 font-sans border-t border-white/[0.03]"
-            style={{ padding: "10px 40px", fontSize: 11 }}
+            className="flex items-center justify-between text-parchment-500 font-sans"
+            style={{
+              padding: "10px 40px",
+              fontSize: 11,
+              borderTop: "1px solid var(--hairline-veil)",
+            }}
           >
             <div className="flex items-center gap-3">
               <span className="tabular-nums">248 words</span>
@@ -199,8 +220,9 @@ function EditView() {
               {p.slice(0, 108)}
               <mark
                 style={{
-                  background: "rgba(214,138,60,0.18)",
-                  color: "#f4ebd7",
+                  background:
+                    "color-mix(in oklab, var(--color-ember-500) 22%, transparent)",
+                  color: "var(--color-parchment-100)",
                   padding: "0 2px",
                   borderRadius: "2px",
                 }}
@@ -226,11 +248,10 @@ function EditView() {
           top: 150,
           left: 132,
           padding: "5px 6px",
-          background:
-            "linear-gradient(180deg, rgba(38, 20, 14, 0.98), rgba(20, 10, 7, 0.98))",
-          border: "1px solid rgba(214, 138, 60, 0.30)",
+          background: "var(--surface-glass-strong)",
+          border: "1px solid color-mix(in oklab, var(--color-ember-500) 40%, transparent)",
           boxShadow:
-            "0 12px 40px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(214,138,60,0.05)",
+            "0 12px 40px -12px rgba(0,0,0,0.25), 0 0 0 1px color-mix(in oklab, var(--color-ember-500) 8%, transparent)",
         }}
       >
         {[
@@ -244,14 +265,19 @@ function EditView() {
             key={label}
             className={`text-xs font-sans px-2 py-1 rounded-lg transition-colors ${
               i === 0
-                ? "bg-ember-500/20 text-parchment-50"
-                : "text-parchment-300 hover:text-parchment-100 hover:bg-white/[0.04]"
+                ? "text-parchment-50"
+                : "text-parchment-300 hover:text-parchment-100"
             }`}
+            style={
+              i === 0
+                ? { background: "var(--accent-tint-strong)" }
+                : undefined
+            }
           >
             {label}
           </button>
         ))}
-        <div className="w-px h-4 bg-white/10 mx-1" />
+        <div className="w-px h-4 mx-1" style={{ background: "var(--track)" }} />
         <button className="text-[10px] font-sans text-parchment-400 px-2 py-1 flex items-center gap-1 rounded-lg">
           <IconCommand style={{ width: 10, height: 10 }} />
           K
@@ -297,7 +323,8 @@ function PreviewView() {
         style={{ left: 20, gap: 6 }}
       >
         <div
-          className="w-[1.5px] flex-1 bg-white/10 rounded-full relative overflow-hidden"
+          className="w-[1.5px] flex-1 rounded-full relative overflow-hidden"
+          style={{ background: "var(--track)" }}
         >
           <div
             className="absolute top-0 left-0 w-full bg-ember-400"
@@ -323,7 +350,7 @@ function CommandPalette({ onClose }: { onClose: () => void }) {
     <div
       className="absolute inset-0 z-30 flex items-start justify-center"
       style={{
-        background: "rgba(10, 5, 3, 0.55)",
+        background: "var(--scrim)",
         backdropFilter: "blur(4px)",
         paddingTop: 60,
       }}
@@ -334,16 +361,18 @@ function CommandPalette({ onClose }: { onClose: () => void }) {
         className="rounded-2xl overflow-hidden"
         style={{
           width: 480,
-          background:
-            "linear-gradient(180deg, rgba(38, 20, 14, 0.98) 0%, rgba(20, 10, 7, 0.98) 100%)",
-          border: "1px solid rgba(214, 138, 60, 0.25)",
-          boxShadow:
-            "0 30px 60px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(214,138,60,0.05), 0 0 40px rgba(214,138,60,0.15)",
+          background: "var(--surface-glass-strong)",
+          border:
+            "1px solid color-mix(in oklab, var(--color-ember-500) 30%, transparent)",
+          boxShadow: "var(--shadow-palette)",
         }}
       >
         <div
-          className="flex items-center gap-3 border-b border-white/[0.04]"
-          style={{ padding: "16px 20px" }}
+          className="flex items-center gap-3"
+          style={{
+            padding: "16px 20px",
+            borderBottom: "1px solid var(--hairline-soft)",
+          }}
         >
           <IconSparkles
             style={{ width: 16, height: 16, color: "#efb361" }}
@@ -371,10 +400,10 @@ function CommandPalette({ onClose }: { onClose: () => void }) {
           ].map(([label, meta]) => (
             <div
               key={label}
-              className="flex items-center justify-between rounded-lg cursor-pointer transition-colors hover:bg-ember-500/[0.08]"
+              className="flex items-center justify-between rounded-lg cursor-pointer transition-colors"
               style={{
                 padding: "8px 12px",
-                color: "#e8dbbb",
+                color: "var(--color-parchment-200)",
               }}
             >
               <span className="font-sans text-sm">{label}</span>

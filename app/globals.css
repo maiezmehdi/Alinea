@@ -37,12 +37,80 @@
   --radius-sheet: 28px;
 }
 
-:root {
+:root, :root[data-theme="dark"] {
   color-scheme: dark;
   --bg-radial:
     radial-gradient(ellipse 80% 60% at 50% 40%, rgba(214, 138, 60, 0.22), transparent 60%),
     radial-gradient(ellipse 100% 80% at 50% 100%, rgba(140, 70, 25, 0.35), transparent 70%),
     linear-gradient(180deg, #1a0d09 0%, #0a0503 100%);
+
+  /* Semantic surfaces (override in light theme) */
+  --surface-glass: linear-gradient(180deg, rgba(38, 20, 14, 0.60) 0%, rgba(20, 10, 7, 0.60) 100%);
+  --surface-glass-strong: linear-gradient(180deg, rgba(38, 20, 14, 0.92) 0%, rgba(20, 10, 7, 0.96) 100%);
+  --surface-sheet: linear-gradient(180deg, rgba(38, 20, 14, 0.98) 0%, rgba(20, 10, 7, 0.98) 100%);
+  --surface-card: linear-gradient(180deg, rgba(38, 20, 14, 0.5) 0%, rgba(20, 10, 7, 0.5) 100%);
+  --hairline: rgba(214, 138, 60, 0.14);
+  --hairline-soft: rgba(255, 255, 255, 0.04);
+  --hairline-veil: rgba(255, 255, 255, 0.03);
+  --track: rgba(255, 255, 255, 0.10);
+  --track-soft: rgba(255, 255, 255, 0.03);
+  --pill-bg: rgba(255, 255, 255, 0.04);
+  --accent-tint: rgba(214, 138, 60, 0.10);
+  --accent-tint-strong: rgba(214, 138, 60, 0.15);
+  --shadow-elevated: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+  --shadow-palette: 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(214,138,60,0.05), 0 0 40px rgba(214,138,60,0.15);
+  --scrim: rgba(10, 5, 3, 0.55);
+  --window-outline: rgba(214, 138, 60, 0.14);
+  --status-bar-fg: rgba(255, 255, 255, 0.8);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-radial:
+    radial-gradient(ellipse 90% 60% at 50% 30%, rgba(224, 160, 88, 0.14), transparent 60%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(200, 150, 90, 0.10), transparent 70%),
+    linear-gradient(180deg, #fbf6ec 0%, #f5edd9 100%);
+
+  /* Invert the palette so existing utilities read on cream. */
+  --color-ink-950: #fbf6ec;
+  --color-ink-900: #f5edd9;
+  --color-ink-800: #ede2c2;
+  --color-ink-700: #e5d6ab;
+  --color-ink-600: #d9c48a;
+  --color-ink-500: #b09976;
+  --color-ink-400: #8a7358;
+
+  --color-parchment-50: #17110a;
+  --color-parchment-100: #2a1c10;
+  --color-parchment-200: #3a2818;
+  --color-parchment-300: #4d3620;
+  --color-parchment-400: #6b5033;
+  --color-parchment-500: #8a7358;
+  --color-parchment-600: #a89477;
+
+  --color-ember-200: #a06614;
+  --color-ember-300: #935a10;
+  --color-ember-400: #7d4c0a;
+  --color-ember-500: #6d3f06;
+  --color-ember-600: #582f04;
+
+  --surface-glass: linear-gradient(180deg, rgba(255, 251, 240, 0.65) 0%, rgba(248, 240, 220, 0.65) 100%);
+  --surface-glass-strong: linear-gradient(180deg, rgba(253, 246, 228, 0.96) 0%, rgba(245, 236, 214, 0.98) 100%);
+  --surface-sheet: linear-gradient(180deg, rgba(253, 247, 231, 0.98) 0%, rgba(246, 237, 216, 0.98) 100%);
+  --surface-card: linear-gradient(180deg, rgba(255, 251, 240, 0.55) 0%, rgba(248, 240, 220, 0.55) 100%);
+  --hairline: rgba(112, 65, 25, 0.14);
+  --hairline-soft: rgba(60, 35, 10, 0.06);
+  --hairline-veil: rgba(60, 35, 10, 0.04);
+  --track: rgba(60, 35, 10, 0.10);
+  --track-soft: rgba(60, 35, 10, 0.04);
+  --pill-bg: rgba(60, 35, 10, 0.04);
+  --accent-tint: rgba(155, 100, 30, 0.08);
+  --accent-tint-strong: rgba(155, 100, 30, 0.14);
+  --shadow-elevated: 0 20px 40px -22px rgba(80, 45, 10, 0.20), 0 2px 6px -2px rgba(80, 45, 10, 0.08);
+  --shadow-palette: 0 30px 60px -22px rgba(80, 45, 10, 0.28), 0 0 0 1px rgba(155, 100, 30, 0.06);
+  --scrim: rgba(60, 40, 15, 0.20);
+  --window-outline: rgba(112, 65, 25, 0.12);
+  --status-bar-fg: rgba(30, 20, 10, 0.75);
 }
 
 html, body {
@@ -52,6 +120,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  transition: background-color 400ms ease, color 400ms ease;
 }
 
 body {
@@ -94,6 +163,21 @@ body {
   background: linear-gradient(160deg, #5a3a26 0%, #2a1610 40%, #1a0d09 100%);
 }
 
+/* Phone screen mirrors the current theme's canvas */
+.phone-screen {
+  background: var(--color-ink-950);
+}
+
+/* Kbd/inline mark */
+kbd {
+  font-family: var(--font-sans);
+  font-size: 0.85em;
+  padding: 1px 5px;
+  border: 1px solid var(--hairline);
+  background: var(--pill-bg);
+  border-radius: 4px;
+}
+
 /* Fine scrollbars */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background: rgba(214, 138, 60, 0.2); border-radius: 3px; }
@@ -114,7 +198,7 @@ body {
   height: 22px;
 }
 .range-slider::-webkit-slider-runnable-track {
-  background: linear-gradient(90deg, var(--color-ember-500) 0%, var(--color-ember-500) var(--val, 50%), rgba(255,255,255,0.08) var(--val, 50%));
+  background: linear-gradient(90deg, var(--color-ember-500) 0%, var(--color-ember-500) var(--val, 50%), var(--track) var(--val, 50%));
   height: 1.5px;
   border-radius: 1px;
 }
@@ -130,7 +214,7 @@ body {
   cursor: pointer;
 }
 .range-slider::-moz-range-track {
-  background: rgba(255,255,255,0.08);
+  background: var(--track);
   height: 1.5px;
   border-radius: 1px;
 }
