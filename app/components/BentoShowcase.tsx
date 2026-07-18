@@ -124,9 +124,9 @@ export function BentoShowcase() {
           className="font-display text-parchment-50"
           style={{ fontSize: 44, letterSpacing: "-0.02em", lineHeight: 1.05 }}
         >
-          Une seule surface. Tout ce que fait Docs.
+          Une seule surface pour tout écrire.
           <br />
-          <span className="italic text-ember-200">Rien de ce qui l&apos;alourdit.</span>
+          <span className="italic text-ember-200">Rien de ce qui alourdit.</span>
         </h2>
         <p
           className="mt-5 max-w-xl mx-auto text-parchment-400 font-serif"

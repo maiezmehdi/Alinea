@@ -67,10 +67,10 @@ export default function Home() {
 
       {/* Header */}
       <header className="max-w-6xl mx-auto flex items-center justify-between px-8 pt-8">
-        <div className="flex items-baseline gap-1.5">
+        <div className="flex items-baseline">
           <span
             className="font-display italic text-ember-300 leading-none"
-            style={{ fontSize: 28 }}
+            style={{ fontSize: 28, marginRight: -1 }}
           >
             A
           </span>
@@ -79,6 +79,16 @@ export default function Home() {
             style={{ fontSize: 22, letterSpacing: "-0.01em" }}
           >
             linéa
+          </span>
+          <span
+            className="font-sans uppercase text-ember-300 ml-2 leading-none tabular-nums"
+            style={{
+              fontSize: 9,
+              letterSpacing: "0.15em",
+              opacity: 0.85,
+            }}
+          >
+            beta
           </span>
         </div>
         <nav className="flex items-center gap-6 text-parchment-400 text-sm font-sans">
@@ -101,16 +111,6 @@ export default function Home() {
             Piliers
           </a>
           <ThemeToggle />
-          <span
-            className="hidden md:inline px-3 py-1.5 rounded-full text-xs font-sans text-ember-200"
-            style={{
-              border:
-                "1px solid color-mix(in oklab, var(--color-ember-500) 35%, transparent)",
-              background: "var(--accent-tint)",
-            }}
-          >
-            Maquette v0.2
-          </span>
         </nav>
       </header>
 
@@ -305,9 +305,9 @@ export default function Home() {
             className="mt-4 max-w-2xl mx-auto text-parchment-400 font-serif"
             style={{ fontSize: 17, lineHeight: 1.55 }}
           >
-            Google Docs a la collaboration. Notion a la structure. Claude a
-            l&apos;intelligence. Alinéa a <em>tout ça</em> — dans une surface
-            d&apos;écriture qui a été <em>designée</em>.
+            L&apos;un a la collaboration. L&apos;autre a la structure. Un
+            troisième a l&apos;intelligence. Alinéa a <em>tout ça</em> — dans
+            une surface d&apos;écriture qui a été <em>designée</em>.
           </p>
         </div>
 
@@ -325,9 +325,9 @@ export default function Home() {
               Critère
             </div>
             {[
-              { label: "Google Docs", tone: "muted" },
-              { label: "Notion", tone: "muted" },
-              { label: "Claude · ChatGPT", tone: "muted" },
+              { label: "L'éditeur classique", tone: "muted" },
+              { label: "L'outil de productivité", tone: "muted" },
+              { label: "L'assistant IA", tone: "muted" },
               { label: "Alinéa", tone: "brand" },
             ].map((c) => (
               <div
@@ -355,38 +355,38 @@ export default function Home() {
             {[
               [
                 "Surface d'écriture",
-                "Marges A4, toolbar Word",
-                "Blocs, base de données",
-                "Chat + textarea",
-                "Canvas éditorial, mode Preview",
+                "Marges figées, toolbar permanente",
+                "Blocs, bases de données",
+                "Chat + zone de texte",
+                "Canvas éditorial · mode Preview",
               ],
               [
                 "IA",
-                "Gemini en sidebar",
-                "AI en dropdown, générique",
+                "Ajoutée sur le côté",
+                "Insérée par menu",
                 "L'IA est le produit",
                 "Inline, contextuelle, voix apprise",
               ],
               [
                 "Rendu final",
-                "Doc Word 1997",
-                "Page web wiki",
-                "Bulle de chat",
+                "Document papier imité",
+                "Page wiki",
+                "Bulle de conversation",
                 "Typographie de livre",
               ],
               [
                 "Écosystème",
-                "Google Workspace",
+                "Écosystème dominant",
                 "Écosystème fermé",
-                "Aucun natif",
-                "Google + Notion + export universel",
+                "Aucun connecteur natif",
+                "Ouvert — connecté, jamais captif",
               ],
               [
-                "Vitesse blanc → utile",
-                "15 min de mise en forme",
-                "Structure d'abord, écrire ensuite",
+                "Blanc → utile",
+                "Mise en forme manuelle",
+                "Structurer avant d'écrire",
                 "Copier-coller vers un autre outil",
-                "30 sec de prompt, sortie mise en forme",
+                "Prompt court, sortie déjà mise en forme",
               ],
               [
                 "Sensation",
@@ -550,17 +550,22 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="max-w-6xl mx-auto px-8 pb-12 pt-6 flex items-center justify-between text-parchment-500 text-xs font-sans">
-        <div className="flex items-baseline gap-1">
-          <span className="font-display italic text-ember-400 text-base leading-none">
+        <div className="flex items-baseline">
+          <span
+            className="font-display italic text-ember-400 text-base leading-none"
+            style={{ marginRight: -1 }}
+          >
             A
           </span>
           <span className="font-display text-parchment-300 leading-none">
             linéa
           </span>
-          <span className="ml-3">Maquette · itération 1</span>
+          <span className="ml-3 italic font-serif text-parchment-400">
+            un objet en construction
+          </span>
         </div>
-        <div>
-          Prochaine étape : câbler Gemini + auth Google · vrai éditeur Tiptap
+        <div className="italic font-serif text-parchment-400">
+          Là où la pensée devient paragraphe.
         </div>
       </footer>
     </main>

@@ -26,7 +26,7 @@ const seed: Feedback[] = [
     metier: "Product Manager",
     name: "Théo",
     message:
-      "L'inline avec Gemini + le push vers Notion, c'est exactement ce que je faisais en trois onglets.",
+      "L'IA vit dans le texte, pas à côté. Pour la première fois j'ai réécrit trois paragraphes sans changer d'onglet.",
     at: "il y a 3 jours",
   },
   {
@@ -41,7 +41,7 @@ const seed: Feedback[] = [
     id: "s4",
     metier: "Consultant",
     message:
-      "Le ⌘K qui lit mes emails et prépare mes memos — plus jamais de doc vide le matin.",
+      "Une commande, mes notes du matin sont prêtes. Plus jamais de page vide.",
     at: "la semaine dernière",
   },
 ];
@@ -101,19 +101,19 @@ export function FeedbackSection() {
     <section id="feedback" className="max-w-4xl mx-auto px-8 pb-24">
       <div className="text-center mb-10">
         <div className="inline-block text-xs font-sans uppercase tracking-[0.2em] text-ember-300 mb-3">
-          Ton avis
+          Ta parole
         </div>
         <h2
           className="font-display text-parchment-50"
           style={{ fontSize: 32, letterSpacing: "-0.02em", lineHeight: 1.1 }}
         >
-          Qu&apos;est-ce qui te ferait quitter Docs ?
+          Un mot sur ce qui compte quand tu écris.
         </h2>
         <p
           className="mt-3 max-w-lg mx-auto text-parchment-400 font-serif"
           style={{ fontSize: 14, lineHeight: 1.55 }}
         >
-          Deux lignes suffisent. Dis-nous qui tu es — ton métier nous aide à
+          Deux lignes suffisent. Ton métier reste ta signature — ça nous aide à
           entendre qui parle.
         </p>
       </div>
@@ -185,7 +185,7 @@ export function FeedbackSection() {
           {/* Message */}
           <div className="flex-1">
             <textarea
-              placeholder="Ce qui te ferait changer d'éditeur…"
+              placeholder="Ce qui compte pour toi quand tu écris…"
               rows={2}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
