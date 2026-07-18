@@ -12,8 +12,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/extension-character-count": "^3.28.0",
+    "@tiptap/extension-highlight": "^3.28.0",
+    "@tiptap/extension-placeholder": "^3.28.0",
+    "@tiptap/extension-typography": "^3.28.0",
+    "@tiptap/pm": "^3.28.0",
+    "@tiptap/react": "^3.28.0",
+    "@tiptap/starter-kit": "^3.28.0",
     "motion": "^12.42.2",
     "next": "15.5.20",
+    "next-auth": "^5.0.0-beta.31",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

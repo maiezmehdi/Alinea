@@ -235,6 +235,102 @@ kbd {
 }
 .ember-caret { animation: ember-pulse 1.2s ease-in-out infinite; }
 
+/* Alinéa canvas — Tiptap output */
+.alinea-canvas {
+  color: var(--color-parchment-100);
+}
+.alinea-canvas h1 {
+  font-family: var(--font-display);
+  font-size: 2.2em;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4em;
+  color: var(--color-parchment-50);
+}
+.alinea-canvas h2 {
+  font-family: var(--font-display);
+  font-size: 1.55em;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 1.6em 0 0.4em;
+  color: var(--color-parchment-50);
+}
+.alinea-canvas h3 {
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  margin: 1.4em 0 0.3em;
+  color: var(--color-parchment-50);
+}
+.alinea-canvas p {
+  margin: 0 0 1em;
+}
+.alinea-canvas em { font-style: italic; color: var(--color-parchment-200); }
+.alinea-canvas strong { font-weight: 600; color: var(--color-parchment-50); }
+.alinea-canvas mark, .alinea-canvas [data-highlight] {
+  background: color-mix(in oklab, var(--color-ember-500) 22%, transparent);
+  color: var(--color-parchment-100);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+.alinea-canvas a { color: var(--color-ember-300); text-decoration: underline; text-underline-offset: 3px; }
+.alinea-canvas blockquote,
+.alinea-canvas .editor-quote {
+  border-left: 2px solid color-mix(in oklab, var(--color-ember-500) 45%, transparent);
+  padding: 0.2em 0 0.2em 1em;
+  margin: 1em 0;
+  color: var(--color-parchment-200);
+  font-style: italic;
+}
+.alinea-canvas pre,
+.alinea-canvas .editor-code {
+  font-family: ui-monospace, "SF Mono", monospace;
+  background: var(--pill-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.85em;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.alinea-canvas code {
+  font-family: ui-monospace, "SF Mono", monospace;
+  background: var(--pill-bg);
+  border: 1px solid var(--hairline);
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+.alinea-canvas ul, .alinea-canvas ol { padding-left: 1.25em; margin: 0 0 1em; }
+.alinea-canvas li { margin: 0.15em 0; }
+.alinea-canvas li p { margin: 0; }
+.alinea-canvas hr {
+  border: none;
+  height: 1px;
+  background: var(--hairline);
+  margin: 2em 0;
+}
+.alinea-canvas p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--color-parchment-500);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-style: italic;
+}
+/* Preview mode gets a small refinement (centered title, drop cap on first para) */
+.alinea-preview h1 { text-align: center; }
+.alinea-preview > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.4em;
+  line-height: 0.85;
+  float: left;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--color-ember-200);
+}
+/* ProseMirror focus outline */
+.ProseMirror { outline: none; }
+.ProseMirror-focused { outline: none; }
+
 /* Hero entrance — subtle rise + fade with staggered delay */
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(12px); }

@@ -3,66 +3,89 @@
 > Là où la pensée devient paragraphe.
 
 Un éditeur pour ceux qui écrivent pour de vrai. Beau comme un livre,
-intelligent comme un co-auteur, rapide comme une conversation.
-Ambition frontale : remplacer Google Docs, Notion et le chat AI pour
-l'écriture des knowledge workers.
+intelligent comme un co-auteur, rapide comme une conversation. Cible :
+knowledge workers qui écrivent tout, tout le temps.
 
-## État actuel — Maquette v0.1
+## État — V0.4a (auth + éditeur réel)
 
-Cette itération est **visuelle uniquement**. On fige le langage
-design (palette ambrée, typographie Spectral / Crimson, feuille
-inférieure contextuelle) avant de coder le vrai éditeur.
+Pour la première fois, Alinéa se teste vraiment :
 
-**Contenu de la page** :
-- Hero + positionnement
-- Showcase deux téléphones (mode lecture · feuille typographique)
-- Mockup desktop avec Edit / Preview toggle + ⌘K palette
-- Tableau comparatif vs Docs · Notion · Claude
-- Trois piliers manifeste
-- Strip écosystème (Gmail · Drive · Calendar · Docs · Notion · exports)
+- **/login** et **/signup** — Continuer avec Google, ou entrer en invité
+- **/app** — route protégée avec un éditeur Tiptap fonctionnel
+  - Frappe libre, gras, italique, barré, code, titres H1/H2/H3, listes,
+    citations, blocs de code, surligneur
+  - Menu inline sur sélection (Format + IA — IA branchée en V0.5)
+  - ⌘K palette avec insertion de blocs et exports (Markdown, HTML,
+    clipboard)
+  - Toggle Edit / Preview, sélecteur de police (Spectral / Crimson /
+    Inter), sauvegarde localStorage automatique
+
+Landing page (marketing) inchangée par rapport à V0.3 côté structure —
+la voix éditoriale a été généralisée (plus de mentions directes de
+concurrents dans les titres et les messages).
 
 ## Stack
 
-- **Next.js 15** (App Router, React 19)
+- **Next.js 15** (App Router) + **React 19**
 - **Tailwind CSS 4** (config CSS-first, `@theme`)
-- **TypeScript 5**
-- **Google Fonts** : Spectral, Crimson Text, Inter
-
-## Décisions produit figées
-
-| Sujet | Décision |
-|---|---|
-| Cible V1 | Knowledge workers qui écrivent (concurrent frontal de Docs) |
-| Modèle IA | Google Gemini Flash — même OAuth que Google Workspace |
-| Export | Fichier (PDF, .docx, MD, HTML) + push (Google Docs, Notion) |
-| Publication publique | Post-PMF |
-| Collaboration temps réel | Post-PMF |
-| Voice memory profonde | V2 |
-
-## Roadmap prochaines itérations
-
-1. **v0.2** — polish visuel de la maquette (animations, micro-interactions)
-2. **v0.3** — éditeur Tiptap réel (blocs Notion-style, commande "/", drag)
-3. **v0.4** — Gemini câblé (streaming inline, ⌘K, menu de sélection)
-4. **v0.5** — auth Google + intégration Drive (open/save `.docx` et `.gdoc`)
-5. **v0.6** — Gmail + Calendar
-6. **v0.7** — export PDF / .docx (2 templates chacun) + push Notion
-7. **v1** — lancement fermé
+- **NextAuth v5** (Auth.js) — Google OAuth + credentials guest
+- **Tiptap 3** — éditeur riche fondé sur ProseMirror
+- **Motion 12** — spring physics, shared-element transitions
+- Fonts : Spectral, Crimson Text, Inter (Google Fonts)
 
 ## Développement local
 
 ```bash
 npm install
-npm run dev   # http://localhost:3000
-npm run build # production build
+cp .env.example .env.local     # remplir AUTH_SECRET a minima
+npm run dev                    # http://localhost:3000
 ```
 
-## Déploiement
+`AUTH_SECRET` peut être généré avec :
 
-Ce repo est prêt pour **Vercel** (aucune configuration nécessaire —
-Next.js est auto-détecté).
+```bash
+openssl rand -base64 32
+```
 
-Pour brancher Vercel :
-1. Vercel dashboard → *New Project* → importer `maiezmehdi/quickedit`
-2. Sélectionner la branche `claude/stoic-knuth-n905bn` comme production
-3. Deploy — la maquette sera en ligne en ~40 secondes
+Sans `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`, le bouton Google
+n'ouvrira rien — utilise le formulaire **Entrer sans compte** pour tester
+l'éditeur.
+
+## Configurer Google OAuth (5 min)
+
+1. https://console.cloud.google.com/apis/credentials
+2. **Create OAuth Client ID** → Application type : *Web application*
+3. Authorized redirect URIs :
+   - `http://localhost:3000/api/auth/callback/google`
+   - `https://<votre-domaine-vercel>/api/auth/callback/google`
+4. Copier Client ID + Secret dans `.env.local` puis relancer `npm run dev`
+5. Sur Vercel : les mêmes trois variables dans *Settings → Environment
+   Variables*, redéployer
+
+## Décisions produit figées
+
+| Sujet | Décision |
+|---|---|
+| Modèle IA (V0.5) | Google Gemini Flash — même OAuth Google que Workspace |
+| Persistence V0.4a | localStorage (canvas unique par utilisateur) |
+| Persistence V0.5 | DB serveur (Turso ou Postgres via Neon) |
+| Auth V0.4a | Google OAuth + invité |
+| Auth V0.5 | + magic link email |
+| Export | PDF, .docx, Markdown, HTML, push Docs/Notion |
+
+## Prochaines itérations
+
+- **V0.5** — Gemini branché (streaming ⌘K + sélection), vraie DB, magic link
+- **V0.6** — Import universel (docx, gdoc, md, pdf, .eml, Notion)
+- **V0.7** — Google Workspace live (Gmail, Drive, Calendar)
+- **V0.8** — Export PDF templaté, push Notion, lien de partage public
+- **V1** — Lancement fermé
+
+## Déploiement Vercel
+
+Le repo est prêt Next.js — auto-détecté. Ajouter les variables
+d'environnement ci-dessus dans *Settings → Environment Variables* puis
+déployer.
+
+Si le nom du repo change et que Vercel semble ne plus rebuilder :
+*Settings → Git → Disconnect / Reconnect Repository*.

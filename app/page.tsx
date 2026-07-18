@@ -111,6 +111,27 @@ export default function Home() {
             Piliers
           </a>
           <ThemeToggle />
+          <a
+            href="/login"
+            className="hidden sm:inline text-parchment-300 hover:text-parchment-100 transition-colors font-sans"
+            style={{ fontSize: 13 }}
+          >
+            Se connecter
+          </a>
+          <a
+            href="/signup"
+            className="rounded-full font-sans font-medium"
+            style={{
+              padding: "6px 14px",
+              fontSize: 13,
+              color: "#1a0d09",
+              background: "linear-gradient(180deg, #f6d194 0%, #e59a3f 100%)",
+              boxShadow:
+                "0 8px 22px -6px rgba(214,138,60,0.4), inset 0 1px 0 rgba(255,255,255,0.5)",
+            }}
+          >
+            Essayer
+          </a>
         </nav>
       </header>
 
@@ -154,7 +175,7 @@ export default function Home() {
         </p>
         <div className="mt-10 flex items-center justify-center gap-3 rise-in rise-in-4">
           <a
-            href="#showcase"
+            href="/signup"
             className="text-sm font-sans px-5 py-3 rounded-full font-medium"
             style={{
               color: "#1a0d09",
@@ -164,10 +185,10 @@ export default function Home() {
                 "0 10px 30px -8px rgba(214,138,60,0.6), inset 0 1px 0 rgba(255,255,255,0.5)",
             }}
           >
-            Voir la maquette
+            Ouvrir un canvas
           </a>
           <a
-            href="#pillars"
+            href="#showcase"
             className="text-sm font-sans px-5 py-3 rounded-full text-parchment-200 transition-colors hover:text-parchment-50"
             style={{
               border:
@@ -175,7 +196,7 @@ export default function Home() {
               background: "var(--pill-bg)",
             }}
           >
-            Lire le manifeste
+            Voir la maquette
           </a>
         </div>
       </section>
