@@ -234,3 +234,24 @@ kbd {
   50% { opacity: 1; }
 }
 .ember-caret { animation: ember-pulse 1.2s ease-in-out infinite; }
+
+/* Hero entrance — subtle rise + fade with staggered delay */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-in { animation: rise-in 700ms cubic-bezier(0.2, 0.9, 0.28, 1) both; }
+.rise-in-1 { animation-delay: 60ms; }
+.rise-in-2 { animation-delay: 180ms; }
+.rise-in-3 { animation-delay: 320ms; }
+.rise-in-4 { animation-delay: 480ms; }
+
+/* Phone drift — slow, imperceptible breath */
+@keyframes phone-breathe {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-4px) rotate(var(--rot, 0deg)); }
+}
+.phone-breathe { animation: phone-breathe 8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .rise-in, .phone-breathe, .ember-caret { animation: none; }
+}

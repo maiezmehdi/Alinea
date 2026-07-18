@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, LayoutGroup } from "motion/react";
 
 type Theme = "dark" | "light";
 
+const spring = { type: "spring" as const, stiffness: 380, damping: 30, mass: 0.6 };
+
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = (document.documentElement.dataset.theme || "dark") as Theme;
     setTheme(stored);
+    setMounted(true);
   }, []);
 
   function apply(next: Theme) {
@@ -21,48 +26,66 @@ export function ThemeToggle() {
   }
 
   return (
-    <div
-      role="tablist"
-      aria-label="Thème"
-      className="flex items-center rounded-full p-0.5"
-      style={{
-        background: "var(--pill-bg)",
-        border: "1px solid var(--hairline)",
-      }}
-    >
-      {(["dark", "light"] as Theme[]).map((t) => {
-        const active = theme === t;
-        return (
-          <button
-            key={t}
-            role="tab"
-            aria-selected={active}
-            onClick={() => apply(t)}
-            className="flex items-center justify-center rounded-full transition-colors"
-            style={{
-              width: 30,
-              height: 24,
-              background: active ? "var(--accent-tint-strong)" : "transparent",
-              color: active
-                ? "var(--color-parchment-50)"
-                : "var(--color-parchment-500)",
-              border: active
-                ? "1px solid color-mix(in oklab, var(--color-ember-500) 30%, transparent)"
-                : "1px solid transparent",
-            }}
-          >
-            {t === "dark" ? <MoonIcon /> : <SunIcon />}
-          </button>
-        );
-      })}
-    </div>
+    <LayoutGroup id="theme-toggle">
+      <div
+        role="tablist"
+        aria-label="Thème"
+        className="relative flex items-center rounded-full p-0.5"
+        style={{
+          background: "var(--pill-bg)",
+          border: "1px solid var(--hairline)",
+        }}
+      >
+        {(["dark", "light"] as Theme[]).map((t) => {
+          const active = theme === t;
+          return (
+            <button
+              key={t}
+              role="tab"
+              aria-selected={active}
+              onClick={() => apply(t)}
+              className="relative flex items-center justify-center rounded-full"
+              style={{
+                width: 30,
+                height: 24,
+                color: active
+                  ? "var(--color-parchment-50)"
+                  : "var(--color-parchment-500)",
+                transition: "color 220ms ease",
+              }}
+            >
+              {active && mounted && (
+                <motion.span
+                  layoutId="theme-thumb"
+                  aria-hidden
+                  className="absolute inset-0 rounded-full"
+                  transition={spring}
+                  style={{
+                    background: "var(--accent-tint-strong)",
+                    border:
+                      "1px solid color-mix(in oklab, var(--color-ember-500) 30%, transparent)",
+                  }}
+                />
+              )}
+              <span className="relative z-10">
+                {t === "dark" ? <MoonIcon /> : <SunIcon />}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </LayoutGroup>
   );
 }
 
 function MoonIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" stroke="currentColor">
-      <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" strokeLinejoin="round" strokeLinecap="round" />
+      <path
+        d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

@@ -3,6 +3,8 @@ import { CanvasReadingView } from "./components/CanvasReadingView";
 import { TypographySheet } from "./components/TypographySheet";
 import { DesktopMockup } from "./components/DesktopMockup";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { BentoShowcase } from "./components/BentoShowcase";
+import { FeedbackSection } from "./components/FeedbackSection";
 
 const paragraphsLeft = [
   "Some afternoons feel as if they arrive without a purpose. The cup stays warm in her hands, the street outside moves slowly, and for once she does not try to fill the quiet with plans. She lets the hour pass without naming it useful. The room is still, the light is low, and nothing asks to be fixed.",
@@ -115,7 +117,7 @@ export default function Home() {
       {/* Hero */}
       <section className="max-w-6xl mx-auto text-center px-8 pt-28 pb-16">
         <div
-          className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-8 text-xs font-sans text-parchment-300"
+          className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-8 text-xs font-sans text-parchment-300 rise-in rise-in-1"
           style={{
             border:
               "1px solid color-mix(in oklab, var(--color-ember-500) 25%, transparent)",
@@ -126,7 +128,7 @@ export default function Home() {
           Là où la pensée devient paragraphe.
         </div>
         <h1
-          className="font-display text-parchment-50 mx-auto"
+          className="font-display text-parchment-50 mx-auto rise-in rise-in-2"
           style={{
             fontSize: "clamp(48px, 8vw, 96px)",
             lineHeight: 1.02,
@@ -139,7 +141,7 @@ export default function Home() {
           pour de vrai.
         </h1>
         <p
-          className="mt-6 mx-auto text-parchment-300 font-serif"
+          className="mt-6 mx-auto text-parchment-300 font-serif rise-in rise-in-3"
           style={{
             fontSize: 20,
             lineHeight: 1.55,
@@ -150,7 +152,7 @@ export default function Home() {
           une conversation. Connecté à ta vraie vie de travail — Gmail, Drive,
           Calendar, Notion.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-3">
+        <div className="mt-10 flex items-center justify-center gap-3 rise-in rise-in-4">
           <a
             href="#showcase"
             className="text-sm font-sans px-5 py-3 rounded-full font-medium"
@@ -283,6 +285,9 @@ export default function Home() {
           <kbd className="text-ember-300">⌘K</kbd> dans la barre supérieure
         </p>
       </section>
+
+      {/* Bento showcase — animated feature morphing */}
+      <BentoShowcase />
 
       {/* Competitive positioning */}
       <section className="max-w-6xl mx-auto px-8 pb-32">
@@ -539,6 +544,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Feedback section */}
+      <FeedbackSection />
 
       {/* Footer */}
       <footer className="max-w-6xl mx-auto px-8 pb-12 pt-6 flex items-center justify-between text-parchment-500 text-xs font-sans">
